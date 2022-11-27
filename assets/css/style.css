@@ -1,2 +1,81 @@
 *{background-color: transparent;
 }
+
+body{
+padding: 15px;
+}
+
+header{
+    height: 100px;
+    width: 100%;
+    text-align: center;
+    line-height: 200%;
+    background-color: rgb(179, 22, 22);
+    color: white;
+    font-size: 50px;
+}
+
+main{
+    border: 2px solid  black;
+    margin-top: 15px;
+    display: flex;
+}
+
+aside{
+    border: 2px solid  black;
+    width: 30%;
+    display: block;
+}
+
+.searchText{
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+textarea{
+text-align: start;
+width: 100%;
+padding-top: 5px;
+padding-left: 5px;
+line-height: 100%;
+border-radius: 15px;
+}
+
+#searchBtn{
+    background-color: rgb(240, 68, 68);
+    width: 100%;
+    color: white;
+    border-radius: 15px;
+
+}
+
+#searchHistory{
+    margin-top: 10px;
+    border-top: 2px solid lightgray;
+    text-align: center;
+    font-weight: bolder;
+}
+
+li{
+list-style: none;
+width: 100%;
+text-align: center;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+
+li button{
+    width: 100%;
+    border-radius: 15px;
+    background-color: lightgray;
+    font-weight: bold;
+}
+
+section{
+    border: 2px solid  black;
+    width: 70%; 
+}
+#currentBox{
+    border: 2px solid  black;
+    height: 50%;
+}
