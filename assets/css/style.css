@@ -16,13 +16,11 @@ header{
 }
 
 main{
-    border: 2px solid  black;
     margin-top: 15px;
     display: flex;
 }
 
 aside{
-    border: 2px solid  black;
     width: 30%;
     display: block;
 }
@@ -33,7 +31,7 @@ aside{
 }
 
 textarea{
-text-align: start;
+resize: none;
 width: 100%;
 padding-top: 5px;
 padding-left: 5px;
@@ -46,11 +44,11 @@ border-radius: 15px;
     width: 100%;
     color: white;
     border-radius: 15px;
-
+    border-color: transparent;
 }
 
 #searchHistory{
-    margin-top: 10px;
+    margin-top: 15px;
     border-top: 2px solid lightgray;
     text-align: center;
     font-weight: bolder;
@@ -69,13 +67,54 @@ li button{
     border-radius: 15px;
     background-color: lightgray;
     font-weight: bold;
+    border-color: transparent;
+    color: rgb(71, 71, 71);
 }
 
 section{
-    border: 2px solid  black;
     width: 70%; 
+    margin-left: 15px;
 }
 #currentBox{
     border: 2px solid  black;
-    height: 50%;
+    height: 40%;
+}
+
+#currentLocation{
+font-size: 25px;
+font-weight: bolder;
+padding: 10px 5px;
+}
+#currentTemp{
+    font-weight: bold;
+    padding-left: 5px;
+}
+#currentWind{
+    font-weight: bold;
+    padding-left: 5px;
+}
+#currentHumidity{
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+#forcastText{
+    font-size: 20px;
+    font-weight: bolder;
+}
+#forcastBoxes{
+    display: flex;
+}
+.forcastDay{
+    width: 19%;
+    background-color: rgb(179, 22, 22);
+    margin-left: 5px;
+    margin-right: 5px;
+    color: white;
+    padding: 10px 0px 10px 10px;
+}
+
+footer{
+    text-align: center;
+    line-height: 200%;
 }
