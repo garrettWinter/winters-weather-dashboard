@@ -72,7 +72,7 @@ li button{
 }
 
 section{
-    width: 70%; 
+    width: 55%; 
     margin-left: 15px;
 }
 #currentBox{
@@ -106,12 +106,13 @@ padding: 10px 5px;
     display: flex;
 }
 .forcastDay{
-    width: 19%;
+    width: 20%;
     background-color: rgb(179, 22, 22);
     margin-left: 5px;
     margin-right: 5px;
     color: white;
     padding: 10px 0px 10px 10px;
+    border-radius: 15px;    
 }
 
 footer{
