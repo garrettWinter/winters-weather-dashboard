@@ -57,6 +57,54 @@ function displayUpdates (){
     currentWind.textContent = "Wind: " + mainArray[1].forecastLoopArray[5] + " mph";
     currentHumidity.textContent = "Humidity: " + mainArray[1].forecastLoopArray[2] + "%";
 
+
+    /*Loop*/
+for (let i = 1; i < 6; i++) {
+    
+
+    /* Element Creation */
+    var createDayDiv = document.createElement('div');
+    var createForcastDate = document.createElement('p');
+    var createForcastIcon = document.createElement('p');
+    var createForcastTemp = document.createElement('p');
+    var createForcastWind = document.createElement('p');
+    var createForcastHumidity = document.createElement('p');
+
+    /* Element Updates */
+    createDayDiv.classList.add("forecastDay");
+    // createDayDiv.setAttribute("forcastDate", [0]); // NOT WORKING 
+    createForcastDate.classList.add("date");
+    createForcastIcon.classList.add("icon");
+    createForcastTemp.classList.add("temp");
+    createForcastWind.classList.add("wind");
+    createForcastHumidity.classList.add("humidity");
+
+    /* Element Appending */
+    var tableContainer = document.getElementById('forecastBoxes');
+    createDayDiv.appendChild(createForcastDate);
+    /* Need to append data  */
+    createDayDiv.appendChild(createForcastIcon);
+    /* Need to append data  */
+    createDayDiv.appendChild(createForcastTemp);
+    /* Need to append data  */
+    createForcastTemp.textContent = "Temp: " + mainArray[1].forecastLoopArray[1] + " ℉";
+    createDayDiv.appendChild(createForcastWind);
+    /* Need to append data  */
+    createDayDiv.appendChild(createForcastHumidity);
+     /* Need to append data  */
+     tableContainer.appendChild(createDayDiv);
+    };
+/*
+    <div date = "1" class="forecastDay">
+    <p class = "date">Date 1</p>
+    <p class = "icon">ICON</p>
+    <p class = "temp">Temp: ???</p>
+    <p class = "wind">Wind: ???</p>
+    <p class = "humidity">Humidity: ???</p>
+
+*/
+
+
 }
 
 /* Event Listenters*/
