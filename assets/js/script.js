@@ -1,10 +1,11 @@
-console.log("Script File Connected")
-var dt_txt = 0;
+
 var searchBtn = document.querySelector('#searchBtn');
+var currentLocation = document.querySelector('#currentLocation')
+var currentTemp = document.querySelector('#currentTemp')
+var currentWind = document.querySelector('#currentWind')
+var currentHumidity = document.querySelector('#currentHumidity')
 let forecastLoopArray = [];
 let rawData = [];
-let c = 0;
-let i = 0;
 
 let mainArray = []
 
@@ -45,14 +46,18 @@ function dataHandling (){
         forecastLoopArray.push(rawData.list[c].wind.speed);
         mainArray.push({forecastLoopArray});
     }
-
-
     mainArray.unshift(rawData.city.name);
     console.log('----------\n Final Data \n----------');
     console.log(mainArray);
+    displayUpdates();
 };
+function displayUpdates (){
+    currentLocation.textContent = mainArray[0] + " (" + mainArray[1].forecastLoopArray[0]+")";
+    currentTemp.textContent = "Temp: " + mainArray[1].forecastLoopArray[1] + " ℉";
+    currentWind.textContent = "Wind: " + mainArray[1].forecastLoopArray[5] + " mph";
+    currentHumidity.textContent = "Humidity: " + mainArray[1].forecastLoopArray[2] + "%";
 
-
+}
 
 /* Event Listenters*/
 searchBtn.addEventListener("click", citySearch);
