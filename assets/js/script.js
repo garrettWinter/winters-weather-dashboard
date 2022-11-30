@@ -1,27 +1,87 @@
-console.log("Connection Test")
+console.log("Script File Connected")
+var dt_txt = 0;
+var searchBtn = document.querySelector('#searchBtn');
+let forecastLoopArray = [];
+let rawData = [];
+let c = 0;
+let i = 0;
 
-var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=Menahga&appid=7f29a8f10e94d08a0485fced9d41201e&units=imperial';
-// var requestUrl = 'https://api.github.com/repos/twitter/chill/issues?per_page=5';
+let mainArray = []
 
-fetch(requestUrl)
+function citySearch (event){
+    mainArray = [];
+    console.log("citySearch has been triggerd for city "+cityFeild.value)
+    /* Validation to ensure a empty string is not submitted via the api call */
+    if (cityFeild.value.length === 0) {
+        window.alert("Invalid entry, Please enter a City before Searching.");
+        return;
+    }
+    /* Setting the URL and triggering the GET API */
+    var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?appid=7f29a8f10e94d08a0485fced9d41201e&units=imperial&q='+cityFeild.value;
+    fetch(requestUrl)
   .then(function (response) {
     return response.json();
   })
   .then(function (data) {
-    console.log('All Data \n----------');
+    console.log('----------\n API Response Data \n----------');
     console.log(data);
-    console.log('----------\n parsed data \n----------');
-    console.log(data.list[0].dt_txt);
-    console.log(data.list[0].main.temp);
-    console.log(data.list[0].main.humidity);
-    console.log(data.list[0].weather[0].main);
-    console.log(data.list[0].weather[0].icon);
-    console.log(data.list[0].wind.speed);
+    rawData = data;
+    dataHandling();
    });
+};
+
+function dataHandling (){
+    /* Using a index (related to datalist) and count (trying to create the day0, day1 object name dynamicly) */
+    for (let c = 0, i = 0 ; i <= 5; c=c+8, i++) {
+        if (c === 40) {
+            c = 39
+        };
+        forecastLoopArray = [];
+        forecastLoopArray.push(rawData.list[c].dt_txt);
+        forecastLoopArray.push(rawData.list[c].main.temp);
+        forecastLoopArray.push(rawData.list[c].main.humidity);
+        forecastLoopArray.push(rawData.list[c].weather[0].main);
+        forecastLoopArray.push(rawData.list[c].weather[0].icon);
+        forecastLoopArray.push(rawData.list[c].wind.speed);
+        mainArray.push({forecastLoopArray});
+    }
 
 
+    mainArray.unshift(rawData.city.name);
+    console.log('----------\n Final Data \n----------');
+    console.log(mainArray);
+};
+
+
+
+/* Event Listenters*/
+searchBtn.addEventListener("click", citySearch);
 
 /* Pseduo Coding 
+
+Get search button grab the text area feild and store it in the variable
+perform the api call using that saved variable
+for statment through data and create and data array
+
+
+data array layout:
+    City
+    Day 0
+        data.list[0].dt_txt
+        data.list[0].main.temp
+        data.list[0].main.humidity
+        data.list[0].weather[0].main
+        data.list[0].weather[0].icon
+        data.list[0].wind.speed
+    Day 1
+        data.list[8].dt_txt
+        data.list[8].main.temp
+        data.list[8].main.humidity
+        data.list[8].weather[0].main
+        data.list[8].weather[0].icon
+        data.list[8].wind.speed
+    ......
+
 
 Icons is the image name
   https://openweathermap.org/img/w/01n.png
@@ -45,6 +105,14 @@ list:
         icon:
     wind:
         speed:
+
+
+Extras
+    Document.ready should be loaded
+    modal overlay while page loads
+    create button to clear all history
+    create button to remove a single history
+    link OpenWeather in footer
 
 
 */
