@@ -5,7 +5,6 @@ var currentTemp = document.querySelector('#currentTemp')
 var currentWind = document.querySelector('#currentWind')
 var currentHumidity = document.querySelector('#currentHumidity')
 var tableContainer = document.getElementById('forecastBoxes');
-var forecastDayContainer = document.querySelector('.forecastDay');
 let forecastLoopArray = [];
 let rawData = [];
 let mainArray = []
@@ -55,13 +54,10 @@ function dataHandling (){
 };
 function displayUpdates (){
     /* Clearing any previously made child elements */
-    // tableContainer.removeChild(tableContainer.firstElementChild);
-    if (firstLoad === false){
-         forecastDayContainer.removeChild(forecastDayContainer.children[0]);
-         forecastDayContainer.removeChild(forecastDayContainer.children[0]);
-         forecastDayContainer.removeChild(forecastDayContainer.children[0]);
-         forecastDayContainer.removeChild(forecastDayContainer.children[0]);
-         tableContainer.removeChild(tableContainer.children[0]);
+    if (firstLoad === false) {
+        for (let i = 0; i < 5; i++) {
+            tableContainer.removeChild(tableContainer.children[0]);
+    } 
     };
     /* Current Weather box being updated*/
     currentLocation.textContent = mainArray[0] + " (" + dayjs(mainArray[1].forecastLoopArray[0]).format('MM/DD/YY') +")";
@@ -72,8 +68,6 @@ function displayUpdates (){
 
     /*Loop*/
 for (let i = 2; i <= 6; i++) {
-    
-
     /* Element Creation */
     var createDayDiv = document.createElement('div');
     var createForcastDate = document.createElement('p');
@@ -93,7 +87,7 @@ for (let i = 2; i <= 6; i++) {
     createForcastHumidity.classList.add("humidity");
 
     /* Element Appending */
-    createForcastDate.textContent = "Date: " + dayjs(mainArray[i].forecastLoopArray[0]).format('MM/DD/YY');
+    createForcastDate.textContent = dayjs(mainArray[i].forecastLoopArray[0]).format('MM/DD/YY');
     createDayDiv.appendChild(createForcastIcon);
     /* Need to append data  */
     createDayDiv.appendChild(createForcastTemp);
@@ -105,6 +99,10 @@ for (let i = 2; i <= 6; i++) {
     tableContainer.appendChild(createDayDiv);
     };
     firstLoad = false;
+}
+
+function searchHistory (event){
+
 }
 
 /* Event Listenters*/
