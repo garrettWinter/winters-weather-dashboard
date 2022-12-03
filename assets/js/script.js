@@ -1,13 +1,15 @@
-
+console.log("Connected")
 var searchBtn = document.querySelector('#searchBtn');
 var currentLocation = document.querySelector('#currentLocation')
 var currentTemp = document.querySelector('#currentTemp')
 var currentWind = document.querySelector('#currentWind')
 var currentHumidity = document.querySelector('#currentHumidity')
+var tableContainer = document.getElementById('forecastBoxes');
+var forecastDayContainer = document.querySelector('.forecastDay');
 let forecastLoopArray = [];
 let rawData = [];
-
 let mainArray = []
+var firstLoad = true;
 
 function citySearch (event){
     mainArray = [];
@@ -52,14 +54,24 @@ function dataHandling (){
     displayUpdates();
 };
 function displayUpdates (){
-    currentLocation.textContent = mainArray[0] + " (" + mainArray[1].forecastLoopArray[0]+")";
+    /* Clearing any previously made child elements */
+    // tableContainer.removeChild(tableContainer.firstElementChild);
+    if (firstLoad === false){
+         forecastDayContainer.removeChild(forecastDayContainer.children[0]);
+         forecastDayContainer.removeChild(forecastDayContainer.children[0]);
+         forecastDayContainer.removeChild(forecastDayContainer.children[0]);
+         forecastDayContainer.removeChild(forecastDayContainer.children[0]);
+         tableContainer.removeChild(tableContainer.children[0]);
+    };
+    /* Current Weather box being updated*/
+    currentLocation.textContent = mainArray[0] + " (" + dayjs(mainArray[1].forecastLoopArray[0]).format('MM/DD/YY') +")";
     currentTemp.textContent = "Temp: " + mainArray[1].forecastLoopArray[1] + " ℉";
     currentWind.textContent = "Wind: " + mainArray[1].forecastLoopArray[5] + " mph";
     currentHumidity.textContent = "Humidity: " + mainArray[1].forecastLoopArray[2] + "%";
 
 
     /*Loop*/
-for (let i = 1; i < 6; i++) {
+for (let i = 2; i <= 6; i++) {
     
 
     /* Element Creation */
@@ -71,40 +83,28 @@ for (let i = 1; i < 6; i++) {
     var createForcastHumidity = document.createElement('p');
 
     /* Element Updates */
+    TableContainer = document.getElementById('forecastBoxes');createDayDiv.appendChild(createForcastDate);
     createDayDiv.classList.add("forecastDay");
     // createDayDiv.setAttribute("forcastDate", [0]); // NOT WORKING 
     createForcastDate.classList.add("date");
     createForcastIcon.classList.add("icon");
-    createForcastTemp.classList.add("temp");
+    createForcastTemp.classList.add("temp"); 
     createForcastWind.classList.add("wind");
     createForcastHumidity.classList.add("humidity");
 
     /* Element Appending */
-    var tableContainer = document.getElementById('forecastBoxes');
-    createDayDiv.appendChild(createForcastDate);
-    /* Need to append data  */
+    createForcastDate.textContent = "Date: " + dayjs(mainArray[i].forecastLoopArray[0]).format('MM/DD/YY');
     createDayDiv.appendChild(createForcastIcon);
     /* Need to append data  */
     createDayDiv.appendChild(createForcastTemp);
-    /* Need to append data  */
-    createForcastTemp.textContent = "Temp: " + mainArray[1].forecastLoopArray[1] + " ℉";
+    createForcastTemp.textContent = "Temp: " + mainArray[i].forecastLoopArray[1] + " ℉";
     createDayDiv.appendChild(createForcastWind);
-    /* Need to append data  */
+    createForcastWind.textContent = "Wind: " + mainArray[i].forecastLoopArray[5] + " mph";
     createDayDiv.appendChild(createForcastHumidity);
-     /* Need to append data  */
-     tableContainer.appendChild(createDayDiv);
+    createForcastHumidity.textContent = "Humidity: " + mainArray[i].forecastLoopArray[2] + "%";
+    tableContainer.appendChild(createDayDiv);
     };
-/*
-    <div date = "1" class="forecastDay">
-    <p class = "date">Date 1</p>
-    <p class = "icon">ICON</p>
-    <p class = "temp">Temp: ???</p>
-    <p class = "wind">Wind: ???</p>
-    <p class = "humidity">Humidity: ???</p>
-
-*/
-
-
+    firstLoad = false;
 }
 
 /* Event Listenters*/
