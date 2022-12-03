@@ -60,7 +60,10 @@ function displayUpdates (){
     } 
     };
     /* Current Weather box being updated*/
-    currentLocation.textContent = mainArray[0] + " (" + dayjs(mainArray[1].forecastLoopArray[0]).format('MM/DD/YY') +")";
+    var currentIconStringImage = '<img src="https://openweathermap.org/img/w/'+mainArray[1].forecastLoopArray[4]+'.png"'+'alt="'+mainArray[1].forecastLoopArray[3]+'">'
+    currentIconString = mainArray[0] + " (" + dayjs(mainArray[1].forecastLoopArray[0]).format('MM/DD/YY') +") "+currentIconStringImage;
+    console.log(currentIconString)
+    currentLocation.innerHTML = currentIconString;
     currentTemp.textContent = "Temp: " + mainArray[1].forecastLoopArray[1] + " ℉";
     currentWind.textContent = "Wind: " + mainArray[1].forecastLoopArray[5] + " mph";
     currentHumidity.textContent = "Humidity: " + mainArray[1].forecastLoopArray[2] + "%";
@@ -89,7 +92,9 @@ for (let i = 2; i <= 6; i++) {
     /* Element Appending */
     createForcastDate.textContent = dayjs(mainArray[i].forecastLoopArray[0]).format('MM/DD/YY');
     createDayDiv.appendChild(createForcastIcon);
-    /* Need to append data  */
+    let iconString = '';
+    iconString = '<img src="https://openweathermap.org/img/w/'+mainArray[i].forecastLoopArray[4]+'.png"'+'alt="'+mainArray[i].forecastLoopArray[3]+'">'
+    createForcastIcon.innerHTML = iconString;
     createDayDiv.appendChild(createForcastTemp);
     createForcastTemp.textContent = "Temp: " + mainArray[i].forecastLoopArray[1] + " ℉";
     createDayDiv.appendChild(createForcastWind);
@@ -99,10 +104,6 @@ for (let i = 2; i <= 6; i++) {
     tableContainer.appendChild(createDayDiv);
     };
     firstLoad = false;
-}
-
-function searchHistory (event){
-
 }
 
 /* Event Listenters*/

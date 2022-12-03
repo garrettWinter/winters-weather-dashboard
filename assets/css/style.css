@@ -78,6 +78,7 @@ section{
 #currentBox{
     border: 2px solid  black;
     height: 40%;
+    background-color: rgba(206, 168, 168, 0.815);
 }
 
 #currentLocation{
