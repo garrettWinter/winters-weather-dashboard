@@ -10,10 +10,32 @@ let forecastLoopArray = [];
 let rawData = [];
 let mainArray = []
 var firstLoad = true;
-var searchHistoryArray = [];
+var searchHistoryArray;
+var createHistoryli = '';
+var createHistoryButton = '';
+var setValue = '';
 
-function startup(){
-
+function startup() {
+    console.log("Startup Ran");
+    console.log(searchHistoryArray);
+    searchHistoryArray = JSON.parse(localStorage.getItem("Search History"));
+    console.log(searchHistoryArray);
+    if (searchHistoryArray === null){
+        console.log("History was NULL");
+        return;
+    } else {
+        console.log("did this run?");
+        console.log(searchHistoryArray);
+        for (let i = 0; i < searchHistoryArray.length; i++) {
+                        createHistoryli = document.createElement('li');
+            createHistoryButton = document.createElement('button');
+            setValue = searchHistoryArray[i];
+            createHistoryButton.setAttribute('search', setValue);
+            createHistoryli.appendChild(createHistoryButton);
+            searchHistory.appendChild(createHistoryli);
+            createHistoryButton.textContent = setValue;
+        }
+    }
 }
 
 function citySearch (event){
@@ -38,9 +60,9 @@ function citySearch (event){
    });
 };
 
-function dataHandling (){
+function dataHandling() {
     /* Using a index (related to datalist) and count (trying to create the day0, day1 object name dynamicly) */
-    for (let c = 0, i = 0 ; i <= 5; c=c+8, i++) {
+    for (let c = 0, i = 0; i <= 5; c = c + 8, i++) {
         if (c === 40) {
             c = 39
         };
@@ -51,14 +73,20 @@ function dataHandling (){
         forecastLoopArray.push(rawData.list[c].weather[0].main);
         forecastLoopArray.push(rawData.list[c].weather[0].icon);
         forecastLoopArray.push(rawData.list[c].wind.speed);
-        mainArray.push({forecastLoopArray});
+        mainArray.push({ forecastLoopArray });
     }
     mainArray.unshift(rawData.city.name);
     console.log('----------\n Final Data \n----------');
     console.log(mainArray);
 
     //store to local storage
-    searchHistoryArray.push(rawData.city.name);
+    console.log(searchHistoryArray);
+    console.log(rawData.city.name);
+    if (searchHistoryArray === null) {
+        searchHistoryArray = [];
+        searchHistoryArray.push([rawData.city.name]);
+    };
+    searchHistoryArray.push([rawData.city.name]);
     console.log(searchHistoryArray);
     localStorage.setItem("Search History", JSON.stringify(searchHistoryArray));
     displayUpdates();
@@ -70,6 +98,15 @@ function displayUpdates (){
             tableContainer.removeChild(tableContainer.children[0]);
     } 
     };
+    /* Updating Search History */
+    createHistoryli = document.createElement('li');
+    createHistoryButton = document.createElement('button');
+    setValue = mainArray[0];
+    createHistoryButton.setAttribute('search',setValue);
+    createHistoryli.appendChild(createHistoryButton);
+    searchHistory.appendChild(createHistoryli);
+    createHistoryButton.textContent = setValue;    
+    
     /* Current Weather box being updated*/
     var currentIconStringImage = '<img src="https://openweathermap.org/img/w/'+mainArray[1].forecastLoopArray[4]+'.png"'+'alt="'+mainArray[1].forecastLoopArray[3]+'">'
     currentIconString = mainArray[0] + " (" + dayjs(mainArray[1].forecastLoopArray[0]).format('MM/DD/YY') +") "+currentIconStringImage;
