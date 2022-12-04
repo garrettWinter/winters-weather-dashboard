@@ -179,23 +179,38 @@ searchHistory.addEventListener("click", searchHistoryFunction);
 
 startup();
 
-/* Pseduo Coding 
+/* Pseduo Coding:
 
-Get search button grab the text area feild and store it in the variable
-perform the api call using that saved variable
+Responsive Design:
+    Forcast Weather
+        div--forcastboxes cab vbe set to flex direction
+            need to update max width to 100% as well for the media query and center content
+    Header
+        Shrink Font (maybe even word wrap?)
+    Current Weather
+        try to get elements to stack
+    Search
+        Update text from search for a city to city search
+        update text from your search history to search history
+
+
+
+Search History:
+    Error Handling for failed search
+    Bug with first search history and the page refresh duplication?
+    create button to clear all history
+    link OpenWeather in footer
+        Check site attributtion documentation
 
 
 
 Extras
-    Error Handling for failed search
     Document.ready should be loaded
     modal overlay while page loads
-    create button to clear all history
     create button to remove a single history
-    link OpenWeather in footer
     Prevent Duplication of cities in search history
     hover over for search and search history buttoms
-
+    SWtich from alert to modal for blank search feild
 
 */
 
