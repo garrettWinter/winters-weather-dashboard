@@ -6,6 +6,7 @@ var currentWind = document.querySelector('#currentWind')
 var currentHumidity = document.querySelector('#currentHumidity')
 var tableContainer = document.getElementById('forecastBoxes');
 var searchHistory = document.getElementById('searchHistory');
+var clearHistoryBTN = document.querySelector('#clearHistoryBTN')
 let forecastLoopArray = [];
 let rawData = [];
 let mainArray = []
@@ -137,7 +138,7 @@ for (let i = 2; i <= 6; i++) {
     /* Element Updates */
     TableContainer = document.getElementById('forecastBoxes');createDayDiv.appendChild(createForcastDate);
     createDayDiv.classList.add("forecastDay");
-    // createDayDiv.setAttribute("forcastDate", [0]); // NOT WORKING 
+    // createDayDiv.setAttribute("forcastDate", [0]); // NOT WORKING --- ONLY NEEDED if doing clear specific history items
     createForcastDate.classList.add("date");
     createForcastIcon.classList.add("icon");
     createForcastTemp.classList.add("temp"); 
@@ -180,9 +181,20 @@ function searchHistoryFunction(event) {
         });
 }
 
+function clearHistory (event){
+console.log("Clear History has been triggered")
+for (let i = 0; i < searchHistoryArray.length; i++) {
+    searchHistory.removeChild(searchHistory.children[0]);
+}
+searchHistoryArray = [];
+localStorage.setItem("Search History", JSON.stringify(searchHistoryArray));
+}
+
+
 /* Event Listenters*/
 searchBtn.addEventListener("click", citySearch);
 searchHistory.addEventListener("click", searchHistoryFunction);
+clearHistoryBTN.addEventListener("click", clearHistory);
 
 startup();
 
@@ -204,7 +216,7 @@ Responsive Design:
 
 Search History:
     DONE --- Error Handling for failed search
-    Bug with first search history and the page refresh duplication?
+    DONE --- Bug with first search history and the page refresh duplication?
     create button to clear all history
     
  Misc   

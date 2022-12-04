@@ -71,6 +71,13 @@ li button{
     color: rgb(71, 71, 71);
 }
 
+#clearHistoryBTN{
+    width: 100%;
+    background-color:rgba(206, 168, 168, 0.815);
+    border-color: transparent;
+    border-radius: 15px;
+}
+
 section{
     width: 55%; 
     margin-left: 15px;
