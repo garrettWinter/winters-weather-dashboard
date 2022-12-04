@@ -155,11 +155,13 @@ for (let i = 2; i <= 6; i++) {
 }
 
 function searchHistoryFunction(event) {
+    var clicked = event.target.textContent;
+    console.log (clicked);
     // check what event was clicked
     // need to have cityFeild.value populated from localstorage
     mainArray = [];
     /* Setting the URL and triggering the GET API */
-    var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?appid=7f29a8f10e94d08a0485fced9d41201e&units=imperial&q=' + cityFeild.value;
+    var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?appid=7f29a8f10e94d08a0485fced9d41201e&units=imperial&q=' + clicked;
     fetch(requestUrl)
         .then(function (response) {
             return response.json();
