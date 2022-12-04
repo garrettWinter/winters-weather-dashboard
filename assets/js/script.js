@@ -6,6 +6,7 @@ var currentWind = document.querySelector('#currentWind')
 var currentHumidity = document.querySelector('#currentHumidity')
 var tableContainer = document.getElementById('forecastBoxes');
 var searchHistory = document.getElementById('searchHistory');
+var clearHistoryBTN = document.querySelector('#clearHistoryBTN')
 let forecastLoopArray = [];
 let rawData = [];
 let mainArray = []
@@ -14,18 +15,16 @@ var searchHistoryArray;
 var createHistoryli = '';
 var createHistoryButton = '';
 var setValue = '';
+var responseReceived;
 
 function startup() {
     console.log("Startup Ran");
-    console.log(searchHistoryArray);
     searchHistoryArray = JSON.parse(localStorage.getItem("Search History"));
     console.log(searchHistoryArray);
     if (searchHistoryArray === null){
         console.log("History was NULL");
         return;
     } else {
-        console.log("did this run?");
-        console.log(searchHistoryArray);
         for (let i = 0; i < searchHistoryArray.length; i++) {
                         createHistoryli = document.createElement('li');
             createHistoryButton = document.createElement('button');
@@ -39,6 +38,7 @@ function startup() {
 }
 
 function citySearch (event){
+    responseReceived = '';
     mainArray = [];
     console.log("citySearch has been triggerd for city "+cityFeild.value)
     /* Validation to ensure a empty string is not submitted via the api call */
@@ -50,15 +50,24 @@ function citySearch (event){
     var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?appid=7f29a8f10e94d08a0485fced9d41201e&units=imperial&q='+cityFeild.value;
     fetch(requestUrl)
   .then(function (response) {
+    responseReceived = response.status;
+    if (responseReceived != 200) {
+        console.log("Response Status Received:" + responseReceived);
+        window.alert("An unexpected error has occured, please check the spelling of your city.");
+        return;
+    }
     return response.json();
   })
   .then(function (data) {
+    if (responseReceived != 200){
+        return;
+    }
     console.log('----------\n API Response Data \n----------');
     console.log(data);
     rawData = data;
     dataHandling();
    });
-};
+}
 
 function dataHandling() {
     /* Using a index (related to datalist) and count (trying to create the day0, day1 object name dynamicly) */
@@ -84,7 +93,7 @@ function dataHandling() {
     console.log(rawData.city.name);
     if (searchHistoryArray === null) {
         searchHistoryArray = [];
-        searchHistoryArray.push([rawData.city.name]);
+        // searchHistoryArray.push([rawData.city.name]);
     };
     searchHistoryArray.push([rawData.city.name]);
     console.log(searchHistoryArray);
@@ -110,7 +119,6 @@ function displayUpdates (){
     /* Current Weather box being updated*/
     var currentIconStringImage = '<img src="https://openweathermap.org/img/w/'+mainArray[1].forecastLoopArray[4]+'.png"'+'alt="'+mainArray[1].forecastLoopArray[3]+'">'
     currentIconString = mainArray[0] + " (" + dayjs(mainArray[1].forecastLoopArray[0]).format('MM/DD/YY') +") "+currentIconStringImage;
-    console.log(currentIconString)
     currentLocation.innerHTML = currentIconString;
     currentTemp.textContent = "Temp: " + mainArray[1].forecastLoopArray[1] + " ℉";
     currentWind.textContent = "Wind: " + mainArray[1].forecastLoopArray[5] + " mph";
@@ -130,7 +138,7 @@ for (let i = 2; i <= 6; i++) {
     /* Element Updates */
     TableContainer = document.getElementById('forecastBoxes');createDayDiv.appendChild(createForcastDate);
     createDayDiv.classList.add("forecastDay");
-    // createDayDiv.setAttribute("forcastDate", [0]); // NOT WORKING 
+    // createDayDiv.setAttribute("forcastDate", [0]); // NOT WORKING --- ONLY NEEDED if doing clear specific history items
     createForcastDate.classList.add("date");
     createForcastIcon.classList.add("icon");
     createForcastTemp.classList.add("temp"); 
@@ -173,9 +181,20 @@ function searchHistoryFunction(event) {
         });
 }
 
+function clearHistory (event){
+console.log("Clear History has been triggered")
+for (let i = 0; i < searchHistoryArray.length; i++) {
+    searchHistory.removeChild(searchHistory.children[0]);
+}
+searchHistoryArray = [];
+localStorage.setItem("Search History", JSON.stringify(searchHistoryArray));
+}
+
+
 /* Event Listenters*/
 searchBtn.addEventListener("click", citySearch);
 searchHistory.addEventListener("click", searchHistoryFunction);
+clearHistoryBTN.addEventListener("click", clearHistory);
 
 startup();
 
@@ -196,11 +215,16 @@ Responsive Design:
 
 
 Search History:
-    Error Handling for failed search
-    Bug with first search history and the page refresh duplication?
+    DONE --- Error Handling for failed search
+    DONE --- Bug with first search history and the page refresh duplication?
     create button to clear all history
+    
+ Misc   
     link OpenWeather in footer
         Check site attributtion documentation
+    Set box height for Currnt weather so it doesnt colapse on itself
+
+
 
 
 
@@ -211,6 +235,12 @@ Extras
     Prevent Duplication of cities in search history
     hover over for search and search history buttoms
     SWtich from alert to modal for blank search feild
+
+    Improve error handling on city search to include message in console log or on screen message
+        {
+        "cod": "404",
+        "message": "city not found"
+        }
 
 */
 
