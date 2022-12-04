@@ -217,10 +217,10 @@ Responsive Design:
 Search History:
     DONE --- Error Handling for failed search
     DONE --- Bug with first search history and the page refresh duplication?
-    create button to clear all history
+    DONE --- create button to clear all history
     
  Misc   
-    link OpenWeather in footer
+    DONE --- link OpenWeather in footer
         Check site attributtion documentation
     Set box height for Currnt weather so it doesnt colapse on itself
 
