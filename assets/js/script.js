@@ -164,6 +164,7 @@ for (let i = 2; i <= 6; i++) {
 
 function searchHistoryFunction(event) {
     var clicked = event.target.textContent;
+    cityFeild.value = clicked;
     console.log (clicked);
     // check what event was clicked
     // need to have cityFeild.value populated from localstorage
@@ -209,8 +210,8 @@ Responsive Design:
     Current Weather
         try to get elements to stack
     Search
-        Update text from search for a city to city search
-        update text from your search history to search history
+        DONE --- Update text from search for a city to city search
+        DONE --- update text from your search history to search history
 
 
 
@@ -221,8 +222,8 @@ Search History:
     
  Misc   
     DONE --- link OpenWeather in footer
-        Check site attributtion documentation
-    Set box height for Currnt weather so it doesnt colapse on itself
+        DONE --- Check site attributtion documentation
+    DONE --- Set box height for Currnt weather so it doesnt colapse on itself
 
 
 

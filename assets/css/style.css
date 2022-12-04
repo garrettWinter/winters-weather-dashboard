@@ -72,10 +72,11 @@ li button{
 }
 
 #clearHistoryBTN{
+    background-color: rgb(240, 68, 68);
     width: 100%;
-    background-color:rgba(206, 168, 168, 0.815);
-    border-color: transparent;
+    color: white;
     border-radius: 15px;
+    border-color: transparent;
 }
 
 section{
@@ -84,7 +85,7 @@ section{
 }
 #currentBox{
     border: 2px solid  black;
-    height: 40%;
+    min-height : 200px;
     background-color: rgba(206, 168, 168, 0.815);
 }
 
@@ -124,6 +125,7 @@ padding: 10px 5px;
 }
 
 footer{
+    padding-top: 40px;
     text-align: center;
     line-height: 200%;
 }
