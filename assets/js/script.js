@@ -14,18 +14,16 @@ var searchHistoryArray;
 var createHistoryli = '';
 var createHistoryButton = '';
 var setValue = '';
+var responseReceived;
 
 function startup() {
     console.log("Startup Ran");
-    console.log(searchHistoryArray);
     searchHistoryArray = JSON.parse(localStorage.getItem("Search History"));
     console.log(searchHistoryArray);
     if (searchHistoryArray === null){
         console.log("History was NULL");
         return;
     } else {
-        console.log("did this run?");
-        console.log(searchHistoryArray);
         for (let i = 0; i < searchHistoryArray.length; i++) {
                         createHistoryli = document.createElement('li');
             createHistoryButton = document.createElement('button');
@@ -39,6 +37,7 @@ function startup() {
 }
 
 function citySearch (event){
+    responseReceived = '';
     mainArray = [];
     console.log("citySearch has been triggerd for city "+cityFeild.value)
     /* Validation to ensure a empty string is not submitted via the api call */
@@ -50,15 +49,24 @@ function citySearch (event){
     var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?appid=7f29a8f10e94d08a0485fced9d41201e&units=imperial&q='+cityFeild.value;
     fetch(requestUrl)
   .then(function (response) {
+    responseReceived = response.status;
+    if (responseReceived != 200) {
+        console.log("Response Status Received:" + responseReceived);
+        window.alert("An unexpected error has occured, please check the spelling of your city.");
+        return;
+    }
     return response.json();
   })
   .then(function (data) {
+    if (responseReceived != 200){
+        return;
+    }
     console.log('----------\n API Response Data \n----------');
     console.log(data);
     rawData = data;
     dataHandling();
    });
-};
+}
 
 function dataHandling() {
     /* Using a index (related to datalist) and count (trying to create the day0, day1 object name dynamicly) */
@@ -110,7 +118,6 @@ function displayUpdates (){
     /* Current Weather box being updated*/
     var currentIconStringImage = '<img src="https://openweathermap.org/img/w/'+mainArray[1].forecastLoopArray[4]+'.png"'+'alt="'+mainArray[1].forecastLoopArray[3]+'">'
     currentIconString = mainArray[0] + " (" + dayjs(mainArray[1].forecastLoopArray[0]).format('MM/DD/YY') +") "+currentIconStringImage;
-    console.log(currentIconString)
     currentLocation.innerHTML = currentIconString;
     currentTemp.textContent = "Temp: " + mainArray[1].forecastLoopArray[1] + " ℉";
     currentWind.textContent = "Wind: " + mainArray[1].forecastLoopArray[5] + " mph";
@@ -211,6 +218,12 @@ Extras
     Prevent Duplication of cities in search history
     hover over for search and search history buttoms
     SWtich from alert to modal for blank search feild
+
+    Improve error handling on city search to include message in console log or on screen message
+        {
+        "cod": "404",
+        "message": "city not found"
+        }
 
 */
 
