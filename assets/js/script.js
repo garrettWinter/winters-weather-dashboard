@@ -92,7 +92,7 @@ function dataHandling() {
     console.log(rawData.city.name);
     if (searchHistoryArray === null) {
         searchHistoryArray = [];
-        searchHistoryArray.push([rawData.city.name]);
+        // searchHistoryArray.push([rawData.city.name]);
     };
     searchHistoryArray.push([rawData.city.name]);
     console.log(searchHistoryArray);
@@ -203,11 +203,16 @@ Responsive Design:
 
 
 Search History:
-    Error Handling for failed search
+    DONE --- Error Handling for failed search
     Bug with first search history and the page refresh duplication?
     create button to clear all history
+    
+ Misc   
     link OpenWeather in footer
         Check site attributtion documentation
+    Set box height for Currnt weather so it doesnt colapse on itself
+
+
 
 
 
