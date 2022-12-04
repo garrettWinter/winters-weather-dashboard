@@ -5,10 +5,16 @@ var currentTemp = document.querySelector('#currentTemp')
 var currentWind = document.querySelector('#currentWind')
 var currentHumidity = document.querySelector('#currentHumidity')
 var tableContainer = document.getElementById('forecastBoxes');
+var searchHistory = document.getElementById('searchHistory');
 let forecastLoopArray = [];
 let rawData = [];
 let mainArray = []
 var firstLoad = true;
+var searchHistoryArray = [];
+
+function startup(){
+
+}
 
 function citySearch (event){
     mainArray = [];
@@ -50,6 +56,11 @@ function dataHandling (){
     mainArray.unshift(rawData.city.name);
     console.log('----------\n Final Data \n----------');
     console.log(mainArray);
+
+    //store to local storage
+    searchHistoryArray.push(rawData.city.name);
+    console.log(searchHistoryArray);
+    localStorage.setItem("Search History", JSON.stringify(searchHistoryArray));
     displayUpdates();
 };
 function displayUpdates (){
@@ -106,65 +117,45 @@ for (let i = 2; i <= 6; i++) {
     firstLoad = false;
 }
 
+function searchHistoryFunction(event) {
+    // check what event was clicked
+    // need to have cityFeild.value populated from localstorage
+    mainArray = [];
+    /* Setting the URL and triggering the GET API */
+    var requestUrl = 'https://api.openweathermap.org/data/2.5/forecast?appid=7f29a8f10e94d08a0485fced9d41201e&units=imperial&q=' + cityFeild.value;
+    fetch(requestUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            rawData = data;
+            dataHandling();
+        });
+}
+
 /* Event Listenters*/
 searchBtn.addEventListener("click", citySearch);
+searchHistory.addEventListener("click", searchHistoryFunction);
+
+startup();
 
 /* Pseduo Coding 
 
 Get search button grab the text area feild and store it in the variable
 perform the api call using that saved variable
-for statment through data and create and data array
 
-
-data array layout:
-    City
-    Day 0
-        data.list[0].dt_txt
-        data.list[0].main.temp
-        data.list[0].main.humidity
-        data.list[0].weather[0].main
-        data.list[0].weather[0].icon
-        data.list[0].wind.speed
-    Day 1
-        data.list[8].dt_txt
-        data.list[8].main.temp
-        data.list[8].main.humidity
-        data.list[8].weather[0].main
-        data.list[8].weather[0].icon
-        data.list[8].wind.speed
-    ......
-
-
-Icons is the image name
-  https://openweathermap.org/img/w/01n.png
-
-5 day forcast Spots in Array
-    Day 0 - 0
-    Day 1 - 8
-    Day 2 - 16
-    Day 3 - 24
-    Day 4 - 32
-    Day 5-  40
-
-Attributes
-
-list:
-    main:
-        temp:
-        humidity:
-    weather:
-        main:    
-        icon:
-    wind:
-        speed:
 
 
 Extras
+    Error Handling for failed search
     Document.ready should be loaded
     modal overlay while page loads
     create button to clear all history
     create button to remove a single history
     link OpenWeather in footer
+    Prevent Duplication of cities in search history
+    hover over for search and search history buttoms
 
 
 */
