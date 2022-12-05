@@ -1,11 +1,12 @@
-*{background-color: transparent;
+* {
+    background-color: transparent;
 }
 
-body{
-padding: 15px;
+body {
+    padding: 15px;
 }
 
-header{
+header {
     height: 100px;
     width: 100%;
     text-align: center;
@@ -15,32 +16,32 @@ header{
     font-size: 50px;
 }
 
-main{
+main {
     margin-top: 15px;
     display: flex;
     justify-content: space-evenly;
 }
 
-aside{
+aside {
     width: 30%;
     display: block;
 }
 
-.searchText{
+.searchText {
     font-weight: bolder;
     font-size: 25px;
 }
 
-textarea{
-resize: none;
-width: 100%;
-padding-top: 5px;
-padding-left: 5px;
-line-height: 100%;
-border-radius: 15px;
+textarea {
+    resize: none;
+    width: 100%;
+    padding-top: 5px;
+    padding-left: 5px;
+    line-height: 100%;
+    border-radius: 15px;
 }
 
-#searchBtn{
+#searchBtn {
     background-color: rgb(240, 68, 68);
     width: 100%;
     color: white;
@@ -48,22 +49,22 @@ border-radius: 15px;
     border-color: transparent;
 }
 
-#searchHistory{
+#searchHistory {
     margin-top: 15px;
     border-top: 2px solid lightgray;
     text-align: center;
     font-weight: bolder;
 }
 
-li{
-list-style: none;
-width: 100%;
-text-align: center;
-margin-top: 5px;
-margin-bottom: 5px;
+li {
+    list-style: none;
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
-li button{
+li button {
     width: 100%;
     border-radius: 15px;
     background-color: lightgray;
@@ -72,7 +73,7 @@ li button{
     color: rgb(71, 71, 71);
 }
 
-#clearHistoryBTN{
+#clearHistoryBTN {
     background-color: rgb(240, 68, 68);
     width: 100%;
     color: white;
@@ -80,52 +81,58 @@ li button{
     border-color: transparent;
 }
 
-section{
-    width: 55%; 
+section {
+    width: 55%;
     margin-left: 15px;
 }
-#currentBox{
-    border: 2px solid  black;
-    min-height : 200px;
+
+#currentBox {
+    border: 2px solid black;
+    min-height: 200px;
     background-color: rgba(206, 168, 168, 0.815);
 }
 
-#currentLocation{
-font-size: 25px;
-font-weight: bolder;
-padding: 10px 5px;
+#currentLocation {
+    font-size: 25px;
+    font-weight: bolder;
+    padding: 10px 5px;
 }
-#currentTemp{
-    font-weight: bold;
-    padding-left: 5px;
-}
-#currentWind{
-    font-weight: bold;
-    padding-left: 5px;
-}
-#currentHumidity{
+
+#currentTemp {
     font-weight: bold;
     padding-left: 5px;
 }
 
-#forecastText{
+#currentWind {
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+#currentHumidity {
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+#forecastText {
     font-size: 20px;
     font-weight: bolder;
 }
-#forecastBoxes{
+
+#forecastBoxes {
     display: flex;
 }
-.forecastDay{
+
+.forecastDay {
     width: 20%;
     background-color: rgb(179, 22, 22);
     margin-left: 5px;
     margin-right: 5px;
     color: white;
     padding: 10px 0px 10px 10px;
-    border-radius: 15px;    
+    border-radius: 15px;
 }
 
-footer{
+footer {
     padding-top: 40px;
     text-align: center;
     line-height: 200%;
@@ -136,67 +143,77 @@ footer{
 
 @media (max-width: 1301px) {
     .section {
-        width: 90%; 
+        width: 90%;
     }
+
     aside {
-        width:30%; 
+        width: 30%;
     }
-  }
-  
-  @media (max-width: 900px) {
+}
+
+@media (max-width: 900px) {
     .section {
-        width: 90%; 
+        width: 90%;
     }
+
     aside {
-        width:30%; 
+        width: 30%;
     }
+
     header {
         line-height: 225%;
         font-size: 40px;
     }
+
     .forecastDay {
         width: 40%;
-  }
-  }
+    }
+}
 
-  @media (max-width: 800px) {
-    #forecastBoxes{
+@media (max-width: 800px) {
+    #forecastBoxes {
         flex-direction: column;
         padding-left: 20%;
         width: 100%;
     }
+
     p {
         margin-bottom: 0;
-      }
     }
-    .forecastDay {
-        width: 75%;
-        margin-bottom: 5px;
-  }
-  
+}
 
-  @media (max-width: 700px) {
-    #forecastBoxes{
+.forecastDay {
+    width: 75%;
+    margin-bottom: 5px;
+}
+
+
+@media (max-width: 700px) {
+    #forecastBoxes {
         padding-left: 15%;
     }
+
     header {
         line-height: 365%;
         font-size: 25px;
     }
-    textarea{
+
+    textarea {
         font-size: 25px;
     }
-  }
+}
 
-  @media (max-width: 430px) {
+@media (max-width: 430px) {
     .forecastDay {
         width: 90%;
     }
+
     header {
         line-height: 495%;
         font-size: 20px;
     }
-    textarea{
+
+    textarea {
         font-size: 20px;
     }
-  }
+}
