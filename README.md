@@ -30,7 +30,7 @@ Provide a short description explaining the what, why, and how of your project. U
         - https://garrettwinter.github.io/winters-weather-dashboard/
         
     - Below a screenshot of the webpage
-        - ![Screenshot of Garrett Winter's, Winter's Weather Dashboard](./assets/images/Dashboard-Screenshot.pnga)
+        - ![Screenshot of Garrett Winter's, Winter's Weather Dashboard](./assets/images/Dashboard-Screenshot.png)
 
 ## Credits
 
