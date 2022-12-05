@@ -7,6 +7,7 @@ var currentHumidity = document.querySelector('#currentHumidity')
 var tableContainer = document.getElementById('forecastBoxes');
 var searchHistory = document.getElementById('searchHistory');
 var clearHistoryBTN = document.querySelector('#clearHistoryBTN')
+var forecastText = document.querySelector("#forecastText")
 let forecastLoopArray = [];
 let rawData = [];
 let mainArray = []
@@ -107,6 +108,7 @@ function displayUpdates (){
             tableContainer.removeChild(tableContainer.children[0]);
     } 
     };
+    forecastText.textContent = '5 Day Forecast:';
     /* Updating Search History */
     createHistoryli = document.createElement('li');
     createHistoryButton = document.createElement('button');
@@ -164,6 +166,7 @@ for (let i = 2; i <= 6; i++) {
 
 function searchHistoryFunction(event) {
     var clicked = event.target.textContent;
+    cityFeild.value = clicked;
     console.log (clicked);
     // check what event was clicked
     // need to have cityFeild.value populated from localstorage
@@ -202,17 +205,16 @@ startup();
 
 Responsive Design:
     Forcast Weather
-        div--forcastboxes cab vbe set to flex direction
-            need to update max width to 100% as well for the media query and center content
+        DONE --- div--forcastboxes cab vbe set to flex direction
+            need to update max width well for the media query and center content
     Header
-        Shrink Font (maybe even word wrap?)
+        DONE --- Shrink Font
     Current Weather
-        try to get elements to stack
+        DONE --- try to get elements to stack
     Search
-        Update text from search for a city to city search
-        update text from your search history to search history
-
-
+        DONE --- Update text from search for a city to city search
+        DONE --- update text from your search history to search history
+   
 
 Search History:
     DONE --- Error Handling for failed search
@@ -221,8 +223,8 @@ Search History:
     
  Misc   
     DONE --- link OpenWeather in footer
-        Check site attributtion documentation
-    Set box height for Currnt weather so it doesnt colapse on itself
+        DONE --- Check site attributtion documentation
+    DONE --- Set box height for Currnt weather so it doesnt colapse on itself
 
 
 
